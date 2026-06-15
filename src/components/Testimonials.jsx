@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { Star, ChevronLeft, ChevronRight } from 'lucide-react'
 
@@ -56,9 +56,18 @@ const reviews = [
 const Testimonials = () => {
   const [current, setCurrent] = useState(0)
   const [isPaused, setIsPaused] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
   const total = reviews.length
-  const VISIBLE = 3
 
+  // Detect mobile screen
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768)
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
+
+  const VISIBLE = isMobile ? 1 : 3
   const prev = () => setCurrent((c) => (c - 1 + total) % total)
   const next = () => setCurrent((c) => (c + 1) % total)
 
@@ -104,7 +113,7 @@ const Testimonials = () => {
                 initial={{ opacity: 0, x: 40 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.4, delay: idx * 0.08 }}
-                className='bg-white dark:bg-[#151515] rounded-2xl p-7 border border-gray-100 dark:border-[#2a2a2a] shadow-sm hover:shadow-lg transition-shadow duration-300 flex flex-col gap-4'
+                className='bg-white dark:bg-[#151515] rounded-2xl p-7 border border-gray-100 dark:border-[#2a2a2a] shadow-sm hover:shadow-lg transition-shadow duration-300 flex flex-col gap-4 min-h-[280px]'
               >
                 {/* Stars */}
                 <div className='flex gap-1'>

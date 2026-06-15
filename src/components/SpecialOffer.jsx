@@ -25,6 +25,7 @@ const useCountdown = (target) => {
   return time
 }
 
+/* eslint-disable react/prop-types */
 const TimeBlock = ({ value, label }) => (
   <div className='flex flex-col items-center'>
     <motion.div
@@ -32,7 +33,7 @@ const TimeBlock = ({ value, label }) => (
       initial={{ scale: 1.3, opacity: 0.5 }}
       animate={{ scale: 1, opacity: 1 }}
       transition={{ duration: 0.3 }}
-      className='bg-white/20 backdrop-blur-sm text-white font-bold text-2xl md:text-4xl w-16 h-16 md:w-20 md:h-20 rounded-xl flex items-center justify-center border border-white/30'
+      className='bg-white/20 backdrop-blur-sm text-white font-bold text-xl sm:text-2xl md:text-4xl w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 rounded-xl flex items-center justify-center border border-white/30'
     >
       {String(value).padStart(2, '0')}
     </motion.div>
@@ -99,13 +100,13 @@ const SpecialOffer = () => {
               <p className='text-white/70 uppercase tracking-widest text-sm font-semibold'>
                 Offer ends in
               </p>
-              <div className='flex items-center gap-3'>
+              <div className='flex items-center gap-2 sm:gap-3'>
                 <TimeBlock value={days} label='Days' />
-                <span className='text-white/60 text-3xl font-light mb-5'>:</span>
+                <span className='text-white/60 text-2xl sm:text-3xl font-light mb-5'>:</span>
                 <TimeBlock value={hours} label='Hours' />
-                <span className='text-white/60 text-3xl font-light mb-5'>:</span>
+                <span className='text-white/60 text-2xl sm:text-3xl font-light mb-5'>:</span>
                 <TimeBlock value={mins} label='Mins' />
-                <span className='text-white/60 text-3xl font-light mb-5'>:</span>
+                <span className='text-white/60 text-2xl sm:text-3xl font-light mb-5'>:</span>
                 <TimeBlock value={secs} label='Secs' />
               </div>
             </div>

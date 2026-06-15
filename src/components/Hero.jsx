@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import Navbar from './Navbar';
 import Shoe1 from '../assets/Shoes1.png';
 import Shoe2 from '../assets/Shoes2.png';
 import Shoe3 from '../assets/Shoes3.png';
@@ -76,10 +75,8 @@ const Hero = () => {
         initial={{ backgroundColor: activeData.bgColor }}
         animate={{ backgroundColor: activeData.bgColor }}
         transition={{ duration: 0.8 }}
-        className='bg-brandDark text-white'
+        className='bg-brandDark text-white pt-20'
       >
-        {/* navbar component */}
-        <Navbar />
         {/* Hero component */}
         <div className='container grid grid-cols-1 md:grid-cols-2 min-h-[605px] '>
           {/* data info */}
@@ -171,7 +168,7 @@ const Hero = () => {
               }}
               src={activeData.image} 
               alt="" 
-              className='w-[300px] md:w-[200px] lg:w-[600px] img-shadow lg:absolute lg:top-[10%] z-10' />
+              className='w-[220px] sm:w-[280px] md:w-[360px] lg:w-[480px] xl:w-[600px] img-shadow lg:absolute lg:top-[10%] z-10' />
               </AnimatePresence>
               <AnimatePresence mode='wait'>
               <motion.div
@@ -179,7 +176,7 @@ const Hero = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.4, delay: 0, ease: easeInOut }}
-              className='text-white/5 text-[300px] font-poppins font-extrabold absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 z-0'>{activeData.modal}</motion.div>
+              className='text-white/5 text-[70px] sm:text-[120px] md:text-[200px] lg:text-[280px] xl:text-[300px] font-poppins font-extrabold absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 z-0 hidden sm:block'>{activeData.modal}</motion.div>
               </AnimatePresence>
           </div>
         </div>

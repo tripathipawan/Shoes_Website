@@ -12,13 +12,13 @@ const footerLinks = {
     { label: 'Sale', to: '/mens' },
   ],
   Help: [
-    { label: 'FAQ', to: '#' },
-    { label: 'Shipping & Returns', to: '#' },
-    { label: 'Size Guide', to: '#' },
+    { label: 'FAQ', to: '/faq' },
+    { label: 'Shipping & Returns', to: '/faq' },
+    { label: 'Size Guide', to: '/faq' },
     { label: 'Track Order', to: '#' },
   ],
   Company: [
-    { label: 'About Us', to: '#' },
+    { label: 'About Us', to: '/about' },
     { label: 'Careers', to: '#' },
     { label: 'Contact', to: '/contact' },
     { label: 'Press', to: '#' },
@@ -50,10 +50,10 @@ const Footer = () => {
         initial='hidden'
         whileInView='show'
         viewport={{ once: true }}
-        className='max-w-7xl mx-auto px-4 py-14 grid grid-cols-2 md:grid-cols-5 gap-8'
+        className='max-w-7xl mx-auto px-4 py-14 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-8'
       >
         {/* Brand column */}
-        <motion.div variants={itemVariants} className='col-span-2 md:col-span-2 pr-8'>
+        <motion.div variants={itemVariants} className='col-span-1 sm:col-span-2 md:col-span-2 pr-8'>
           <div className='bg-gray-700 dark:bg-gray-800 rounded-lg inline-block p-2 mb-4'>
             <img src={Logo} alt='Nike' className='max-w-[80px]' />
           </div>

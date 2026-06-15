@@ -26,6 +26,7 @@ const useCounter = (target, duration = 2000, start = false) => {
   return count
 }
 
+/* eslint-disable react/prop-types */
 const StatItem = ({ value, suffix, label }) => {
   const ref = useRef(null)
   const inView = useInView(ref, { once: true })

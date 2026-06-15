@@ -187,13 +187,15 @@ const Cart = () => {
                     </div>
                   </div>
 
-                  <motion.button
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    className='w-full mt-6 bg-[#138695] text-white font-bold py-4 rounded-xl flex items-center justify-center gap-2 hover:bg-[#0f6a77] transition-colors duration-200 text-base'
-                  >
-                    Proceed to Checkout <ArrowRight size={18} />
-                  </motion.button>
+                  <Link to='/checkout'>
+                    <motion.button
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      className='w-full mt-6 bg-[#138695] text-white font-bold py-4 rounded-xl flex items-center justify-center gap-2 hover:bg-[#0f6a77] transition-colors duration-200 text-base'
+                    >
+                      Proceed to Checkout <ArrowRight size={18} />
+                    </motion.button>
+                  </Link>
 
                   <Link to='/mens'>
                     <button className='w-full mt-3 text-[#138695] font-semibold py-3 rounded-xl border border-[#138695]/30 hover:bg-[#138695]/5 transition-colors duration-200 text-sm'>

@@ -3,9 +3,13 @@ import Home from './Pages/Home'
 import Contact from './Pages/Contact'
 import Cart from './Pages/Cart'
 import Wishlist from './Pages/Wishlist'
+import Checkout from './Pages/Checkout'
+import OrderSuccess from './Pages/OrderSuccess'
+import About from './Pages/About'
+import FAQ from './Pages/FAQ'
 import Footer from './components/Footer'
+import Navbar from './components/Navbar'
 import ProductList from './components/ProductList'
-import Navbar2 from './components/Navbar2'
 import SingleProduct from './components/SingleProduct'
 import NotFound from './Pages/NotFound'
 
@@ -16,35 +20,51 @@ const router = createBrowserRouter([
   },
   {
     path:'/mens',
-    element: <div className='bg-white dark:bg-[#0a0a0a] min-h-screen transition-colors duration-300'><Navbar2/><ProductList category="men"/><Footer/></div>
+    element: <><Navbar /><div className='bg-white dark:bg-[#0a0a0a] min-h-screen transition-colors duration-300 pt-20'><ProductList category="men"/><Footer/></div></>
   },
   {
     path:'/womens',
-    element: <div className='bg-white dark:bg-[#0a0a0a] min-h-screen transition-colors duration-300'><Navbar2/><ProductList category="women"/><Footer/></div>
+    element: <><Navbar /><div className='bg-white dark:bg-[#0a0a0a] min-h-screen transition-colors duration-300 pt-20'><ProductList category="women"/><Footer/></div></>
   },
   {
     path:'/kids',
-    element: <div className='bg-white dark:bg-[#0a0a0a] min-h-screen transition-colors duration-300'><Navbar2/><ProductList category="kid"/><Footer/></div>
+    element: <><Navbar /><div className='bg-white dark:bg-[#0a0a0a] min-h-screen transition-colors duration-300 pt-20'><ProductList category="kid"/><Footer/></div></>
   },
   {
     path:'/contact',
-    element: <div className='bg-white dark:bg-[#0a0a0a] min-h-screen transition-colors duration-300'><Navbar2/><Contact/><Footer/></div>
+    element: <><Navbar /><div className='bg-white dark:bg-[#0a0a0a] min-h-screen transition-colors duration-300 pt-20'><Contact/><Footer/></div></>
   },
   {
     path: "/products/:productId",
-    element: <div className='bg-white dark:bg-[#0a0a0a] min-h-screen transition-colors duration-300'><Navbar2/><SingleProduct/><Footer/></div>
+    element: <><Navbar /><div className='bg-white dark:bg-[#0a0a0a] min-h-screen transition-colors duration-300 pt-20'><SingleProduct/><Footer/></div></>
   },
   {
     path:'/cart',
-    element: <div className='bg-white dark:bg-[#0a0a0a] min-h-screen transition-colors duration-300'><Navbar2/><Cart/><Footer/></div>
+    element: <><Navbar /><div className='bg-white dark:bg-[#0a0a0a] min-h-screen transition-colors duration-300 pt-20'><Cart/><Footer/></div></>
   },
   {
     path:'/wishlist',
-    element: <div className='bg-white dark:bg-[#0a0a0a] min-h-screen transition-colors duration-300'><Navbar2/><Wishlist/><Footer/></div>
+    element: <><Navbar /><div className='bg-white dark:bg-[#0a0a0a] min-h-screen transition-colors duration-300 pt-20'><Wishlist/><Footer/></div></>
+  },
+  {
+    path:'/checkout',
+    element: <><Navbar /><div className='bg-white dark:bg-[#0a0a0a] min-h-screen transition-colors duration-300 pt-20'><Checkout/><Footer/></div></>
+  },
+  {
+    path:'/order-success',
+    element: <><Navbar /><div className='bg-white dark:bg-[#0a0a0a] min-h-screen transition-colors duration-300 pt-20'><OrderSuccess/><Footer/></div></>
+  },
+  {
+    path:'/about',
+    element: <><Navbar /><div className='bg-white dark:bg-[#0a0a0a] min-h-screen transition-colors duration-300 pt-20'><About/><Footer/></div></>
+  },
+  {
+    path:'/faq',
+    element: <><Navbar /><div className='bg-white dark:bg-[#0a0a0a] min-h-screen transition-colors duration-300 pt-20'><FAQ/><Footer/></div></>
   },
   {
     path: '*',
-    element: <div className='bg-white dark:bg-[#0a0a0a] min-h-screen transition-colors duration-300'><Navbar2/><NotFound/></div>
+    element: <><Navbar /><div className='bg-white dark:bg-[#0a0a0a] min-h-screen transition-colors duration-300 pt-20'><NotFound/></div></>
   },
 ])
 

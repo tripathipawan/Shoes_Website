@@ -2,8 +2,6 @@
 
 A fully functional Nike shoes e-commerce storefront built with React 18, Tailwind CSS 3, and Framer Motion. The app delivers a multi-page shopping experience with a real cart system, product browsing by category, a dedicated product detail page with image switcher, a contact form, dark mode, and a custom animated mouse cursor — all without any backend, running entirely on the client.
 
-**Live Demo → [nike-eta-beryl.vercel.app](https://nike-eta-beryl.vercel.app)**
-
 ---
 
 ## What This Project Does

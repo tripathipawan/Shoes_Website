@@ -52,7 +52,7 @@ const itemVariants = {
 
 const InstagramGallery = () => {
   return (
-    <section className='py-20 bg-gray-50 dark:bg-[#0f0f0f] transition-colors duration-300'>
+    <section className='py-20 bg-gray-50 dark:bg-[#0f0f0f] transition-colors duration-300' aria-labelledby='gallery-heading'>
       <div className='container'>
         {/* Header */}
         <motion.div
@@ -68,7 +68,7 @@ const InstagramGallery = () => {
               @nikeshoes
             </span>
           </div>
-          <h2 className='text-4xl md:text-5xl font-bold text-gray-900 dark:text-white'>
+          <h2 id='gallery-heading' className='text-4xl md:text-5xl font-bold text-gray-900 dark:text-white'>
             #JustDoIt Gallery
           </h2>
           <p className='text-gray-500 dark:text-gray-400 mt-3 max-w-lg'>
@@ -89,11 +89,15 @@ const InstagramGallery = () => {
               key={item.id}
               variants={itemVariants}
               whileHover={{ scale: 1.03 }}
-              className='group relative aspect-square rounded-2xl overflow-hidden bg-gray-100 dark:bg-[#1a1a1a] cursor-pointer'
+              className='group relative aspect-square rounded-2xl overflow-hidden bg-gray-100 dark:bg-[#2a2a2a] cursor-pointer'
             >
               <img
                 src={item.src}
                 alt={item.alt}
+                width={300}
+                height={300}
+                loading='lazy'
+                decoding='async'
                 className='w-full h-full object-contain p-4 group-hover:scale-110 transition-transform duration-500'
               />
 

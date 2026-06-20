@@ -3,6 +3,7 @@ import { useLocation, useNavigate, Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { CheckCircle, Package, Truck, Mail, ArrowRight } from 'lucide-react'
 import confetti from 'canvas-confetti'
+import SEO from '../components/SEO'
 
 const OrderSuccess = () => {
   const location = useLocation()
@@ -52,7 +53,9 @@ const OrderSuccess = () => {
   }
 
   return (
-    <div className='container py-12 min-h-screen'>
+    <>
+      <SEO title='Order Confirmed' description='Your order has been placed successfully.' noIndex={true} />
+      <div className='container py-12 min-h-screen'>
       <div className='max-w-3xl mx-auto'>
         {/* Success Icon */}
         <motion.div
@@ -98,7 +101,7 @@ const OrderSuccess = () => {
             </div>
             <div>
               <p className='text-sm text-gray-500 dark:text-gray-400 mb-1'>Total Amount</p>
-              <p className='text-xl font-bold text-[#138695]'>₹{total}</p>
+              <p className='text-xl font-bold text-[#138695]'>${total}</p>
             </div>
           </div>
 
@@ -108,11 +111,19 @@ const OrderSuccess = () => {
             <div className='space-y-3 max-h-[300px] overflow-y-auto'>
               {cartProducts?.map((product) => (
                 <div key={product.id} className='flex gap-4 p-3 bg-gray-50 dark:bg-[#1a1a1a] rounded-lg'>
-                  <img src={product.image} alt={product.name} className='w-16 h-16 object-cover rounded-lg' />
+                <img
+                  src={product.image}
+                  alt={product.name}
+                  width={64}
+                  height={64}
+                  loading='lazy'
+                  decoding='async'
+                  className='w-16 h-16 object-cover rounded-lg'
+                />
                   <div className='flex-1'>
                     <p className='font-medium text-gray-900 dark:text-white'>{product.name}</p>
                     <p className='text-sm text-gray-500'>Size: M | Color: Default</p>
-                    <p className='text-sm font-semibold text-[#138695] mt-1'>₹{product.new_price}</p>
+                    <p className='text-sm font-semibold text-[#138695] mt-1'>${product.new_price}</p>
                   </div>
                 </div>
               ))}
@@ -201,6 +212,7 @@ const OrderSuccess = () => {
         </motion.div>
       </div>
     </div>
+    </>
   )
 }
 

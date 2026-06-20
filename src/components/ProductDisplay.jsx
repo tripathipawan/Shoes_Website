@@ -1,14 +1,23 @@
 /* eslint-disable react/prop-types */
 import { useContext, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { useNavigate } from 'react-router-dom'
 import { ShopContext } from '../context/ShopContext'
 import { Star, Heart, ShoppingCart, Share2, Check } from 'lucide-react'
-import { Link } from 'react-router-dom'
 
 const SIZES = ['UK 6', 'UK 7', 'UK 8', 'UK 9', 'UK 10', 'UK 11', 'UK 12']
 
+// CLEAN-04: Dynamic description based on product
+const getDescription = (product) => {
+  const audience = product.category === 'kid'
+    ? 'young athletes'
+    : `${product.category}'s`
+  return `Engineered for ${audience}, the ${product.name} delivers premium comfort and iconic Nike style. Whether you're hitting the gym or the streets, this shoe rises to every occasion with responsive cushioning and breathable construction.`
+}
+
 const ProductDisplay = ({ product }) => {
   const { addToCart, toggleWishlist, isWishlisted } = useContext(ShopContext)
+  const navigate = useNavigate()
   const [mainImage, setMainImage] = useState(product.image)
   const [selectedSize, setSelectedSize] = useState(null)
   const [sizeError, setSizeError] = useState(false)
@@ -18,6 +27,7 @@ const ProductDisplay = ({ product }) => {
   const wishlisted = isWishlisted(product.id)
   const discount = Math.round(((product.old_price - product.new_price) / product.old_price) * 100)
 
+  // BUG-01 fixed: no more <Link> wrapper; navigate manually only on success
   const handleAddToCart = () => {
     if (!selectedSize) {
       setSizeError(true)
@@ -26,7 +36,18 @@ const ProductDisplay = ({ product }) => {
     setSizeError(false)
     addToCart(product.id)
     setAddedToCart(true)
-    setTimeout(() => setAddedToCart(false), 2000)
+    setTimeout(() => {
+      setAddedToCart(false)
+      navigate('/cart')
+    }, 1200)
+  }
+
+  const handleShare = async () => {
+    try {
+      await navigator.share({ title: product.name, url: window.location.href })
+    } catch {
+      await navigator.clipboard.writeText(window.location.href)
+    }
   }
 
   return (
@@ -39,26 +60,37 @@ const ProductDisplay = ({ product }) => {
         className='flex gap-4'
       >
         {/* Thumbnails */}
-        <div className='flex flex-col gap-3'>
+        <div className='flex flex-col gap-3' role='listbox' aria-label='Product image gallery'>
           {thumbnails.map((img, i) => (
             <button
               key={i}
               onClick={() => setMainImage(img)}
+              role='option'
+              aria-selected={mainImage === img}
+              aria-label={`View product image ${i + 1}`}
               className={`w-16 h-16 md:w-20 md:h-20 rounded-xl overflow-hidden border-2 transition-all duration-200 ${
                 mainImage === img
                   ? 'border-[#138695] scale-105'
                   : 'border-gray-200 dark:border-[#2a2a2a] hover:border-[#138695]/50'
-              } bg-gray-50 dark:bg-[#1a1a1a]`}
+              } bg-gray-50 dark:bg-[#2a2a2a]`}
             >
-              <img src={img} alt={`View ${i + 1}`} className='w-full h-full object-contain p-2' />
+              <img
+                src={img}
+                alt={`${product.name} view ${i + 1}`}
+                width={80}
+                height={80}
+                loading='lazy'
+                decoding='async'
+                className='w-full h-full object-contain p-2'
+              />
             </button>
           ))}
         </div>
 
         {/* Main image */}
-        <div className='flex-1 relative bg-gray-50 dark:bg-[#151515] rounded-2xl overflow-hidden border border-gray-100 dark:border-[#2a2a2a]'>
+        <div className='flex-1 relative bg-gray-50 dark:bg-[#242424] rounded-2xl overflow-hidden border border-gray-100 dark:border-[#333]'>
           {discount > 0 && (
-            <div className='absolute top-4 left-4 z-10 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full'>
+            <div className='absolute top-4 left-4 z-10 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full' aria-label={`${discount}% discount`}>
               -{discount}%
             </div>
           )}
@@ -71,6 +103,10 @@ const ProductDisplay = ({ product }) => {
               transition={{ duration: 0.3 }}
               src={mainImage}
               alt={product.name}
+              width={600}
+              height={460}
+              loading='eager'
+              decoding='async'
               className='w-full h-80 md:h-[460px] object-contain p-6'
             />
           </AnimatePresence>
@@ -86,7 +122,7 @@ const ProductDisplay = ({ product }) => {
       >
         {/* Category tag */}
         <span className='text-[#138695] font-semibold uppercase tracking-widest text-xs'>
-          {product.category}&rsquo;s shoes
+          {product.category}&apos;s shoes
         </span>
 
         {/* Name */}
@@ -95,8 +131,8 @@ const ProductDisplay = ({ product }) => {
         </h1>
 
         {/* Rating */}
-        <div className='flex items-center gap-2'>
-          <div className='flex gap-0.5'>
+        <div className='flex items-center gap-2' role='img' aria-label='Rating: 4 out of 5 stars, 122 reviews'>
+          <div className='flex gap-0.5' aria-hidden='true'>
             {[...Array(5)].map((_, i) => (
               <Star
                 key={i}
@@ -112,32 +148,32 @@ const ProductDisplay = ({ product }) => {
         {/* Price */}
         <div className='flex items-end gap-3'>
           <span className='text-4xl font-extrabold text-[#138695]'>${product.new_price}</span>
-          <span className='text-xl text-gray-400 line-through mb-0.5'>${product.old_price}</span>
+          <span className='text-xl text-gray-400 line-through mb-0.5' aria-label={`Original price $${product.old_price}`}>${product.old_price}</span>
           {discount > 0 && (
             <span className='text-green-500 font-semibold text-sm mb-0.5'>Save {discount}%</span>
           )}
         </div>
 
-        {/* Description */}
+        {/* CLEAN-04: Dynamic product description */}
         <p className='text-gray-500 dark:text-gray-400 text-sm leading-relaxed'>
-          Experience the perfect blend of comfort and performance. Engineered for athletes and style-conscious individuals, these shoes feature premium materials and iconic Nike design.
+          {getDescription(product)}
         </p>
 
         {/* Size Selection */}
         <div>
           <div className='flex items-center justify-between mb-3'>
-            <h3 className='font-semibold text-gray-800 dark:text-gray-200'>Select Size</h3>
-            <button className='text-[#138695] text-xs font-medium hover:underline'>Size Guide</button>
+            <h2 className='font-semibold text-gray-800 dark:text-gray-200 text-base'>Select Size</h2>
+            <button className='text-[#138695] text-xs font-medium hover:underline' aria-label='View size guide'>Size Guide</button>
           </div>
-          <div className='flex flex-wrap gap-2'>
+          <div className='flex flex-wrap gap-2' role='radiogroup' aria-label='Shoe size'>
             {SIZES.map((size) => (
               <button
                 key={size}
-                onClick={() => {
-                  setSelectedSize(size)
-                  setSizeError(false)
-                }}
-                className={`px-4 py-2 rounded-xl text-sm font-medium border-2 transition-all duration-200 ${
+                onClick={() => { setSelectedSize(size); setSizeError(false) }}
+                role='radio'
+                aria-checked={selectedSize === size}
+                aria-label={`Size ${size}`}
+                className={`px-4 py-2 rounded-xl text-sm font-medium border-2 transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#138695] ${
                   selectedSize === size
                     ? 'border-[#138695] bg-[#138695] text-white'
                     : sizeError
@@ -153,6 +189,7 @@ const ProductDisplay = ({ product }) => {
             <motion.p
               initial={{ opacity: 0, y: -5 }}
               animate={{ opacity: 1, y: 0 }}
+              role='alert'
               className='text-red-500 text-xs mt-2'
             >
               Please select a size before adding to cart
@@ -160,50 +197,48 @@ const ProductDisplay = ({ product }) => {
           )}
         </div>
 
-        {/* Actions */}
+        {/* Actions — BUG-01 fixed: no <Link> wrapper on cart button */}
         <div className='flex gap-3 pt-2'>
-          <Link to='/cart' className='flex-1'>
-            <motion.button
-              onClick={handleAddToCart}
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.97 }}
-              className={`w-full py-4 rounded-xl font-bold text-white flex items-center justify-center gap-2 transition-all duration-300 ${
-                addedToCart
-                  ? 'bg-green-500 hover:bg-green-600'
-                  : 'bg-[#138695] hover:bg-[#0f6a77]'
-              }`}
-            >
-              <AnimatePresence mode='wait'>
-                {addedToCart ? (
-                  <motion.span
-                    key='added'
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0 }}
-                    className='flex items-center gap-2'
-                  >
-                    <Check size={18} /> Added to Cart
-                  </motion.span>
-                ) : (
-                  <motion.span
-                    key='add'
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    className='flex items-center gap-2'
-                  >
-                    <ShoppingCart size={18} /> Add to Cart
-                  </motion.span>
-                )}
-              </AnimatePresence>
-            </motion.button>
-          </Link>
+          <motion.button
+            onClick={handleAddToCart}
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.97 }}
+            aria-label={addedToCart ? 'Added to cart' : 'Add to cart'}
+            className={`flex-1 py-4 rounded-xl font-bold text-white flex items-center justify-center gap-2 transition-all duration-300 ${
+              addedToCart ? 'bg-green-500 hover:bg-green-600' : 'bg-[#138695] hover:bg-[#0f6a77]'
+            }`}
+          >
+            <AnimatePresence mode='wait'>
+              {addedToCart ? (
+                <motion.span
+                  key='added'
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0 }}
+                  className='flex items-center gap-2'
+                >
+                  <Check size={18} /> Added to Cart
+                </motion.span>
+              ) : (
+                <motion.span
+                  key='add'
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  className='flex items-center gap-2'
+                >
+                  <ShoppingCart size={18} /> Add to Cart
+                </motion.span>
+              )}
+            </AnimatePresence>
+          </motion.button>
 
           <motion.button
             onClick={() => toggleWishlist(product.id)}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             aria-label={wishlisted ? 'Remove from wishlist' : 'Add to wishlist'}
+            aria-pressed={wishlisted}
             className={`p-4 rounded-xl border-2 transition-all duration-200 ${
               wishlisted
                 ? 'border-pink-400 bg-pink-50 dark:bg-pink-900/20 text-pink-500'
@@ -214,6 +249,7 @@ const ProductDisplay = ({ product }) => {
           </motion.button>
 
           <motion.button
+            onClick={handleShare}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             aria-label='Share product'

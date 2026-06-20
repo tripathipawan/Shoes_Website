@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ChevronDown, HelpCircle, Package, CreditCard, Truck, RefreshCw } from 'lucide-react'
+import SEO from '../components/SEO'
 
 const faqData = [
   {
@@ -102,8 +103,31 @@ const FAQ = () => {
     setOpenQuestion(openQuestion === key ? null : key)
   }
 
+  // Build FAQPage JSON-LD from all questions
+  const faqJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqData.flatMap((cat) =>
+      cat.questions.map((item) => ({
+        '@type': 'Question',
+        name: item.q,
+        acceptedAnswer: { '@type': 'Answer', text: item.a },
+      }))
+    ),
+  }
+
   return (
-    <div className='bg-gray-50 dark:bg-[#0a0a0a] min-h-screen transition-colors duration-300'>
+    <>
+      <SEO
+        title='FAQ — Frequently Asked Questions'
+        description='Find answers about orders, shipping, returns, sizing, and more. NikeStore customer support.'
+        canonical='/faq'
+      />
+      <script
+        type='application/ld+json'
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
+      <div className='bg-gray-50 dark:bg-[#0a0a0a] min-h-screen transition-colors duration-300'>
       {/* Hero Section */}
       <section className='bg-gradient-to-r from-[#138695] to-[#0f6d7a] py-20'>
         <div className='container text-center'>
@@ -112,7 +136,7 @@ const FAQ = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <HelpCircle size={64} className='text-white mx-auto mb-6' />
+            <HelpCircle size={64} className='text-white mx-auto mb-6' aria-hidden='true' />
             <h1 className='text-5xl md:text-6xl font-bold text-white mb-6'>
               Frequently Asked Questions
             </h1>
@@ -127,10 +151,13 @@ const FAQ = () => {
       <section className='container py-16'>
         <div className='max-w-5xl mx-auto'>
           {/* Category Tabs */}
-          <div className='flex flex-wrap gap-3 mb-12 justify-center'>
+          <div className='flex flex-wrap gap-3 mb-12 justify-center' role='tablist' aria-label='FAQ categories'>
             {faqData.map((category, idx) => (
               <button
                 key={idx}
+                role='tab'
+                aria-selected={openCategory === idx}
+                aria-controls={`faq-panel-${idx}`}
                 onClick={() => setOpenCategory(idx)}
                 className={`flex items-center gap-2 px-6 py-3 rounded-lg font-semibold transition-all duration-200 ${
                   openCategory === idx
@@ -225,6 +252,7 @@ const FAQ = () => {
         </motion.div>
       </section>
     </div>
+    </>
   )
 }
 

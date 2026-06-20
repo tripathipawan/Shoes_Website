@@ -7,7 +7,8 @@ import all_product from '../Utils/all_product'
 
 const Checkout = () => {
   const navigate = useNavigate()
-  const { cartItems, getTotalCartAmount } = useContext(ShopContext)
+  // BUG-03 fixed: include clearCart
+  const { cartItems, getTotalCartAmount, clearCart } = useContext(ShopContext)
   const [step, setStep] = useState(1) // 1: Shipping, 2: Payment
   const [paymentMethod, setPaymentMethod] = useState('card')
   
@@ -23,8 +24,9 @@ const Checkout = () => {
   })
 
   const cartProducts = all_product.filter((item) => cartItems[item.id] > 0)
+  // BUG-04 fixed: shipping is Free (consistent with Cart.jsx)
   const subtotal = parseFloat(getTotalCartAmount())
-  const shipping = subtotal > 0 ? 50 : 0
+  const shipping = 0
   const tax = (subtotal * 0.08).toFixed(2)
   const total = (subtotal + shipping + parseFloat(tax)).toFixed(2)
 
@@ -40,6 +42,8 @@ const Checkout = () => {
   const handlePlaceOrder = (e) => {
     e.preventDefault()
     const orderNumber = 'ORD' + Math.random().toString(36).substr(2, 9).toUpperCase()
+    // BUG-03 fixed: clear cart on successful order
+    clearCart()
     navigate('/order-success', { state: { orderNumber, total, cartProducts } })
   }
 
@@ -303,11 +307,11 @@ const Checkout = () => {
             <div className='space-y-3 mb-4 max-h-[300px] overflow-y-auto'>
               {cartProducts.map((product) => (
                 <div key={product.id} className='flex gap-3'>
-                  <img src={product.image} alt={product.name} className='w-16 h-16 object-cover rounded-lg' />
+                  <img src={product.image} alt={product.name} width={64} height={64} loading='lazy' className='w-16 h-16 object-cover rounded-lg' />
                   <div className='flex-1'>
                     <p className='text-sm font-medium text-gray-900 dark:text-white line-clamp-1'>{product.name}</p>
                     <p className='text-xs text-gray-500'>Qty: {cartItems[product.id]}</p>
-                    <p className='text-sm font-semibold text-[#138695]'>₹{(product.new_price * cartItems[product.id]).toFixed(2)}</p>
+                    <p className='text-sm font-semibold text-[#138695]'>${(product.new_price * cartItems[product.id]).toFixed(2)}</p>
                   </div>
                 </div>
               ))}
@@ -316,19 +320,19 @@ const Checkout = () => {
             <div className='border-t border-gray-200 dark:border-[#2a2a2a] pt-4 space-y-2'>
               <div className='flex justify-between text-gray-600 dark:text-gray-400'>
                 <span>Subtotal</span>
-                <span>₹{subtotal.toFixed(2)}</span>
+                <span>${subtotal.toFixed(2)}</span>
               </div>
               <div className='flex justify-between text-gray-600 dark:text-gray-400'>
                 <span>Shipping</span>
-                <span>₹{shipping.toFixed(2)}</span>
+                <span className='text-green-500 font-medium'>Free</span>
               </div>
               <div className='flex justify-between text-gray-600 dark:text-gray-400'>
                 <span>Tax (8%)</span>
-                <span>₹{tax}</span>
+                <span>${tax}</span>
               </div>
               <div className='flex justify-between text-xl font-bold text-gray-900 dark:text-white pt-2 border-t border-gray-200 dark:border-[#2a2a2a]'>
                 <span>Total</span>
-                <span>₹{total}</span>
+                <span>${total}</span>
               </div>
             </div>
 
@@ -339,7 +343,7 @@ const Checkout = () => {
               </div>
               <div className='flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400'>
                 <Truck size={16} className='text-[#138695]' />
-                <span>Free shipping on orders over ₹1000</span>
+                <span>Free shipping on orders over $100</span>
               </div>
               <div className='flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400'>
                 <CheckCircle size={16} className='text-[#138695]' />

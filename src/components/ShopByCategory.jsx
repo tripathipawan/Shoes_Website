@@ -54,9 +54,7 @@ const ShopByCategory = () => {
           transition={{ duration: 0.6 }}
           className='text-center mb-14'
         >
-          <span className='text-[#138695] font-semibold uppercase tracking-widest text-sm'>
-            Browse By
-          </span>
+          <span className='text-[#138695] font-semibold uppercase tracking-widest text-sm'>Browse By</span>
           <h2 className='text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mt-2'>
             Shop by Category
           </h2>
@@ -79,7 +77,7 @@ const ShopByCategory = () => {
             >
               <Link to={cat.link}>
                 {/* Background */}
-                <div className='h-80 md:h-96 bg-gray-100 dark:bg-[#1a1a1a] relative overflow-hidden'>
+                <div className='h-80 md:h-96 bg-gray-100 dark:bg-[#2a2a2a] relative overflow-hidden'>
                   {/* Gradient overlay */}
                   <div className='absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent z-10 group-hover:from-black/80 transition-all duration-500' />
 
@@ -92,7 +90,11 @@ const ShopByCategory = () => {
                   {/* Product image */}
                   <img
                     src={cat.image}
-                    alt={cat.label}
+                    alt={`${cat.label} shoes collection — ${cat.description}`}
+                    width={400}
+                    height={400}
+                    loading='lazy'
+                    decoding='async'
                     className='h-full w-full object-contain p-8 group-hover:scale-110 transition-transform duration-700'
                   />
 

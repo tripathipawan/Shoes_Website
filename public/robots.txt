@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Disallow private/utility routes
+Disallow: /order-success
+Disallow: /checkout
+
+Sitemap: https://nikestore.vercel.app/sitemap.xml

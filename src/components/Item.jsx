@@ -8,17 +8,22 @@ const Item = ({ product }) => {
   const { addToCart } = useContext(ShopContext)
 
   return (
-    <div className='group bg-white dark:bg-[#151515] rounded-xl overflow-hidden border border-gray-100 dark:border-[#2a2a2a] shadow-sm hover:shadow-lg transition-shadow duration-300'>
+    <div className='group bg-white dark:bg-[#1e1e1e] rounded-xl overflow-hidden border border-gray-100 dark:border-[#333] shadow-sm hover:shadow-lg transition-shadow duration-300'>
       <Link to={`/products/${product?.id}`}>
-        <div className='aspect-square w-full overflow-hidden bg-gray-50 dark:bg-[#1a1a1a]'>
+        {/* Image area — lighter dark bg so transparent PNGs stay visible */}
+        <div className='aspect-square w-full overflow-hidden bg-gray-50 dark:bg-[#2a2a2a]'>
           <img
             src={product?.image}
             alt={product?.name}
+            width={300}
+            height={300}
+            loading='lazy'
+            decoding='async'
             className='h-full w-full object-contain p-4 group-hover:scale-110 transition-transform duration-500'
           />
         </div>
       </Link>
-      <div className='p-4'>
+      <div className='p-4 bg-white dark:bg-[#1e1e1e]'>
         <Link to={`/products/${product?.id}`}>
           <h3 className='text-sm font-semibold text-gray-700 dark:text-gray-100 line-clamp-2 hover:text-[#138695] transition-colors leading-snug'>
             {product?.name}

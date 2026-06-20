@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { ShopContext } from '../context/ShopContext'
 import { Heart, ShoppingCart, Trash2, ArrowRight } from 'lucide-react'
 import { Link } from 'react-router-dom'
+import SEO from '../components/SEO'
 
 const containerVariants = {
   hidden: {},
@@ -20,7 +21,9 @@ const Wishlist = () => {
   const wishlistedProducts = all_product.filter((p) => wishlist.includes(p.id))
 
   return (
-    <div className='min-h-screen bg-white dark:bg-[#0a0a0a] transition-colors duration-300 py-12'>
+    <>
+      <SEO title='My Wishlist' description='Your saved Nike shoes wishlist.' canonical='/wishlist' noIndex={true} />
+      <div className='min-h-screen bg-white dark:bg-[#0a0a0a] transition-colors duration-300 py-12'>
       <div className='max-w-7xl mx-auto px-4'>
         {/* Header */}
         <motion.div
@@ -89,10 +92,10 @@ const Wishlist = () => {
                     layout
                     exit={cardVariants.exit}
                     whileHover={{ scale: 1.02 }}
-                    className='group bg-gray-50 dark:bg-[#151515] rounded-2xl overflow-hidden border border-gray-100 dark:border-[#2a2a2a] shadow-sm hover:shadow-xl transition-shadow duration-300'
+                    className='group bg-gray-50 dark:bg-[#1e1e1e] rounded-2xl overflow-hidden border border-gray-100 dark:border-[#333] shadow-sm hover:shadow-xl transition-shadow duration-300'
                   >
                     {/* Image */}
-                    <div className='relative bg-gray-100 dark:bg-[#1a1a1a] h-48 sm:h-56'>
+                    <div className='relative bg-gray-100 dark:bg-[#2a2a2a] h-48 sm:h-56'>
                       {/* Remove from wishlist */}
                       <button
                         onClick={() => toggleWishlist(product.id)}
@@ -105,6 +108,10 @@ const Wishlist = () => {
                         <img
                           src={product.image}
                           alt={product.name}
+                          width={224}
+                          height={224}
+                          loading='lazy'
+                          decoding='async'
                           className='h-full w-full object-contain p-4 group-hover:scale-110 transition-transform duration-500'
                         />
                       </Link>
@@ -139,6 +146,7 @@ const Wishlist = () => {
         </AnimatePresence>
       </div>
     </div>
+    </>
   )
 }
 

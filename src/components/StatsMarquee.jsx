@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion'
+import { motion, useReducedMotion } from 'framer-motion'
 import { Star, Zap, Award, Globe, Users, Truck } from 'lucide-react'
 
 const items = [
@@ -16,12 +16,29 @@ const items = [
 const marqueeItems = [...items, ...items]
 
 const StatsMarquee = () => {
+  const shouldReduceMotion = useReducedMotion()
+
   return (
-    <section className='py-6 bg-[#138695] overflow-hidden'>
-      <div className='flex'>
+    <section
+      className='py-6 bg-[#138695] overflow-hidden'
+      aria-label='Store highlights'
+    >
+      {/* Screen reader list — hidden from visual display */}
+      <ul className='sr-only'>
+        {items.map((item) => (
+          <li key={item.text}>{item.text}</li>
+        ))}
+      </ul>
+
+      {/* Visual marquee — hidden from screen readers */}
+      <div className='flex' aria-hidden='true'>
         <motion.div
-          animate={{ x: [0, '-50%'] }}
-          transition={{ repeat: Infinity, duration: 20, ease: 'linear' }}
+          animate={shouldReduceMotion ? {} : { x: [0, '-50%'] }}
+          transition={
+            shouldReduceMotion
+              ? {}
+              : { repeat: Infinity, duration: 20, ease: 'linear' }
+          }
           className='flex items-center gap-0 whitespace-nowrap will-change-transform'
         >
           {marqueeItems.map((item, i) => {

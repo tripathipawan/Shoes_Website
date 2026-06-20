@@ -106,10 +106,10 @@ const PopularProducts = () => {
                   whileHover={{ scale: 1.03 }}
                   onHoverStart={() => setHoveredId(product.id)}
                   onHoverEnd={() => setHoveredId(null)}
-                  className='group bg-white dark:bg-[#151515] rounded-2xl overflow-hidden border border-gray-100 dark:border-[#2a2a2a] shadow-sm hover:shadow-2xl transition-shadow duration-300'
+                  className='group bg-white dark:bg-[#1e1e1e] rounded-2xl overflow-hidden border border-gray-100 dark:border-[#333] shadow-sm hover:shadow-2xl transition-shadow duration-300'
                 >
                   {/* Image with swap on hover */}
-                  <div className='relative bg-gray-50 dark:bg-[#1a1a1a] h-52 md:h-60 overflow-hidden'>
+                  <div className='relative bg-gray-50 dark:bg-[#2a2a2a] h-52 md:h-60 overflow-hidden'>
                     <button
                       onClick={() => toggleWishlist(product.id)}
                       aria-label={isWishlisted(product.id) ? 'Remove from wishlist' : 'Add to wishlist'}
@@ -125,13 +125,17 @@ const PopularProducts = () => {
                       <img
                         src={hoveredId === product.id ? product.image1 : product.image}
                         alt={product.name}
+                        width={300}
+                        height={300}
+                        loading='lazy'
+                        decoding='async'
                         className='h-full w-full object-contain p-4 transition-all duration-500 group-hover:scale-110'
                       />
                     </Link>
                   </div>
 
                   {/* Info */}
-                  <div className='p-4'>
+                  <div className='p-4 bg-white dark:bg-[#1e1e1e]'>
                     <div className='flex text-yellow-400 text-xs gap-0.5 mb-1'>
                       {[...Array(4)].map((_, i) => (
                         <Star key={i} size={12} fill='#facc15' />

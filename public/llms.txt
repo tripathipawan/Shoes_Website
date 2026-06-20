@@ -1,0 +1,50 @@
+# NikeStore — llms.txt
+# AI crawler manifest following the llms.txt convention
+# Full version: /llms-full.txt
+# Spec: https://llmstxt.org/
+
+## Site Purpose
+NikeStore is an e-commerce storefront specializing in authentic Nike sneakers and footwear.
+The site sells Nike shoes across Men's, Women's, and Kids' categories — including Air Max, Air Jordan,
+Air Force 1, VaporMax, and Nike React. Price range: $40–$200 USD. Free shipping on orders over $100.
+
+## Key Pages
+- / — Homepage: hero slider, new arrivals, popular products, category grid, special offers
+- /mens — Men's Nike shoes (filterable by price: under $50, $50–$100, over $100; sortable)
+- /womens — Women's Nike shoes (same filters/sort)
+- /kids — Kids' Nike shoes (same filters/sort)
+- /products/:id — Individual product page with images, size selector, reviews, related products
+- /about — Brand story, mission, values, milestones, animated stat counters
+- /faq — 16 Q&A across 4 categories: Orders & Payment, Shipping, Returns, Products & Sizing
+- /contact — Contact form, address (Uttarakhand, India), phone, email, Google Maps embed
+- /cart — Cart with quantity controls, promo codes, order summary
+- /checkout — 2-step checkout: shipping info → payment (card or COD)
+- /wishlist — Saved products wishlist
+
+## Brand Facts
+- Name: NikeStore (demo/portfolio site, not affiliated with Nike, Inc.)
+- Products: Authentic Nike footwear
+- Price range: $40–$200 USD
+- Shipping: Free on orders over $100
+- Returns: 30-day free returns, free pickup
+- Authenticity: 100% authentic, sourced from authorized distributors
+- Promo codes: NIKE10 (10% off), SAVE20 (20% off), FIRST15 (15% first order)
+- Contact: contact@nikestore.com | +91-63960-96432
+
+## Structured Data Deployed
+- WebSite + SearchAction (Sitelinks Search Box) — index.html
+- Organization — homepage
+- Product (name, image, price, availability, brand) — every /products/:id page
+- FAQPage (16 questions) — /faq
+- BreadcrumbList — all /products/:id pages
+- AboutPage — /about
+
+## Technology Stack
+- React 18, Vite 6, Tailwind CSS 3, Framer Motion 11
+- React Router v7, react-helmet-async
+- State: React Context + localStorage persistence
+- Deploy: Vercel, Gzip + Brotli compression
+
+## Disclaimer
+This is a demo/portfolio project. Not affiliated with Nike, Inc. Nike and all product names
+are trademarks of Nike, Inc. All prices and data are mock/sample for demonstration only.

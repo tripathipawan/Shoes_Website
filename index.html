@@ -3,9 +3,97 @@
 
 <head>
   <meta charset="UTF-8" />
-  <link rel="icon" type="image/svg+xml" href="/src/assets/logo2.png" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Nike</title>
+
+  <!-- Dark mode flash prevention — runs synchronously before first paint -->
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem('theme');
+        if (t === 'dark' || (!t && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+          document.documentElement.classList.add('dark');
+        }
+      } catch (e) {}
+    })();
+  </script>
+
+  <!-- Primary meta -->
+  <title>NikeStore — Just Do It</title>
+  <meta name="description" content="Shop the latest Nike sneakers — Air Max, Jordan, Air Force 1 and more. Free shipping on orders over $100. 100% authentic products." />
+  <meta name="keywords" content="Nike shoes, Air Max, Jordan, Air Force 1, sneakers, athletic footwear" />
+  <meta name="author" content="NikeStore" />
+  <meta name="theme-color" content="#138695" />
+  <meta name="color-scheme" content="light dark" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://nikestore.vercel.app/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://nikestore.vercel.app/" />
+  <meta property="og:title" content="NikeStore — Just Do It" />
+  <meta property="og:description" content="Shop authentic Nike shoes — Air Max, Jordan, and more. Free shipping. 100% authentic." />
+  <meta property="og:image" content="https://nikestore.vercel.app/og-image.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="NikeStore — premium Nike sneakers" />
+  <meta property="og:site_name" content="NikeStore" />
+  <meta property="og:locale" content="en_US" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@NikeStore" />
+  <meta name="twitter:title" content="NikeStore — Just Do It" />
+  <meta name="twitter:description" content="Shop authentic Nike shoes — Air Max, Jordan, and more." />
+  <meta name="twitter:image" content="https://nikestore.vercel.app/og-image.jpg" />
+  <meta name="twitter:image:alt" content="NikeStore sneakers collection" />
+
+  <!-- Favicon & PWA -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/logo1.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/logo1.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/logo1.png" />
+  <link rel="manifest" href="/manifest.json" />
+
+  <!-- GEO: WebSite + SearchAction JSON-LD (Sitelinks Search Box) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "NikeStore",
+    "url": "https://nikestore.vercel.app",
+    "description": "Shop authentic Nike shoes — Air Max, Jordan, Air Force 1 and more.",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": {
+        "@type": "EntryPoint",
+        "urlTemplate": "https://nikestore.vercel.app/mens?q={search_term_string}"
+      },
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
+
+  <!-- Preconnect for Google Fonts — eliminates render-blocking -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <!-- Preconnect for Nike CDN (product images) -->
+  <link rel="preconnect" href="https://static.nike.com" />
+  <link rel="dns-prefetch" href="https://static.nike.com" />
+
+  <!-- Fonts with font-display:swap — prevents invisible text flash (FOIT) -->
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Merienda:wght@400;700;900&display=swap"
+    media="print"
+    onload="this.media='all'"
+  />
+  <!-- Noscript fallback -->
+  <noscript>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Merienda:wght@400;700;900&display=swap"
+    />
+  </noscript>
 </head>
 
 <body>

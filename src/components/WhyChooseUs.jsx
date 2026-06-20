@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion'
+import { motion, useReducedMotion } from 'framer-motion'
 import { Truck, RotateCcw, ShieldCheck, CreditCard } from 'lucide-react'
 
 const features = [
@@ -39,8 +39,13 @@ const cardVariants = {
 }
 
 const WhyChooseUs = () => {
+  const reduced = useReducedMotion()
+
   return (
-    <section className='py-20 bg-gray-50 dark:bg-[#0f0f0f] transition-colors duration-300'>
+    <section
+      className='py-20 bg-gray-50 dark:bg-[#0f0f0f] transition-colors duration-300'
+      aria-labelledby='why-choose-heading'
+    >
       <div className='container'>
         {/* Header */}
         <motion.div
@@ -53,7 +58,7 @@ const WhyChooseUs = () => {
           <span className='text-[#138695] font-semibold uppercase tracking-widest text-sm'>
             Our Promise
           </span>
-          <h2 className='text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mt-2'>
+          <h2 id='why-choose-heading' className='text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mt-2'>
             Why Choose Us
           </h2>
           <p className='text-gray-500 dark:text-gray-400 mt-3 max-w-xl mx-auto'>
@@ -62,45 +67,45 @@ const WhyChooseUs = () => {
         </motion.div>
 
         {/* Feature Grid */}
-        <motion.div
-          variants={containerVariants}
+        <motion.ul
+          variants={reduced ? {} : containerVariants}
           initial='hidden'
           whileInView='show'
           viewport={{ once: true }}
-          className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6'
+          className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 list-none p-0 m-0'
         >
           {features.map((feature) => {
             const Icon = feature.icon
             return (
-              <motion.div
+              <motion.li
                 key={feature.title}
-                variants={cardVariants}
-                whileHover={{ scale: 1.04, y: -4 }}
-                className='bg-white dark:bg-[#151515] rounded-2xl p-8 text-center border border-gray-100 dark:border-[#2a2a2a] shadow-sm hover:shadow-xl transition-shadow duration-300 group'
+                variants={reduced ? {} : cardVariants}
+                whileHover={reduced ? {} : { scale: 1.04, y: -4 }}
+                className='bg-white dark:bg-[#151515] rounded-2xl p-8 text-center border border-gray-100 dark:border-[#2a2a2a] shadow-sm hover:shadow-xl transition-shadow duration-300'
               >
-                {/* Animated icon circle */}
-                <motion.div
-                  whileHover={{ rotate: [0, -10, 10, -5, 0] }}
-                  transition={{ duration: 0.5 }}
+                {/* Icon */}
+                <div
                   className='w-16 h-16 rounded-2xl mx-auto mb-5 flex items-center justify-center'
                   style={{ backgroundColor: `${feature.color}18` }}
+                  aria-hidden='true'
                 >
                   <Icon
                     size={28}
                     style={{ color: feature.color }}
                     strokeWidth={1.5}
+                    aria-hidden='true'
                   />
-                </motion.div>
+                </div>
                 <h3 className='text-lg font-bold text-gray-900 dark:text-white mb-2'>
                   {feature.title}
                 </h3>
                 <p className='text-gray-500 dark:text-gray-400 text-sm leading-relaxed'>
                   {feature.description}
                 </p>
-              </motion.div>
+              </motion.li>
             )
           })}
-        </motion.div>
+        </motion.ul>
       </div>
     </section>
   )

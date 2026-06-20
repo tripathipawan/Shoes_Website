@@ -44,7 +44,7 @@ const itemVariants = {
 
 const Footer = () => {
   return (
-    <footer className='bg-gray-900 dark:bg-[#050505] text-gray-300 transition-colors duration-300'>
+    <footer className='bg-gray-900 dark:bg-[#050505] text-gray-300 transition-colors duration-300' role='contentinfo' aria-label='Site footer'>
       <motion.div
         variants={containerVariants}
         initial='hidden'
@@ -55,7 +55,7 @@ const Footer = () => {
         {/* Brand column */}
         <motion.div variants={itemVariants} className='col-span-1 sm:col-span-2 md:col-span-2 pr-8'>
           <div className='bg-gray-700 dark:bg-gray-800 rounded-lg inline-block p-2 mb-4'>
-            <img src={Logo} alt='Nike' className='max-w-[80px]' />
+          <img src={Logo} alt='NikeStore' width={80} height={28} loading='lazy' className='max-w-[80px]' />
           </div>
           <p className='text-sm text-gray-400 leading-relaxed mb-6'>
             Discover the latest collection of Nike shoes, blending style and performance to keep you ahead in the game.

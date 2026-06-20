@@ -1,0 +1,21 @@
+{
+  "name": "NikeStore",
+  "short_name": "NikeStore",
+  "description": "Shop authentic Nike shoes — Air Max, Jordan, Air Force 1 and more.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#138695",
+  "icons": [
+    {
+      "src": "/logo1.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/logo1.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

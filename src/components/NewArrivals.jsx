@@ -66,7 +66,7 @@ const NewArrivals = () => {
               key={product.id}
               variants={cardVariants}
               whileHover={{ scale: 1.03, transition: { duration: 0.2 } }}
-              className='group bg-gray-50 dark:bg-[#151515] rounded-2xl overflow-hidden border border-gray-100 dark:border-[#2a2a2a] shadow-sm hover:shadow-xl transition-shadow duration-300'
+              className='group bg-gray-50 dark:bg-[#1e1e1e] rounded-2xl overflow-hidden border border-gray-100 dark:border-[#333] shadow-sm hover:shadow-xl transition-shadow duration-300'
             >
               {/* Badge */}
               <div className='relative'>
@@ -86,10 +86,15 @@ const NewArrivals = () => {
                   />
                 </button>
                 <Link to={`/products/${product.id}`}>
-                  <div className='bg-gray-100 dark:bg-[#1a1a1a] h-52 md:h-64 flex items-center justify-center overflow-hidden'>
+                  {/* Lighter dark bg for transparent shoe PNGs */}
+                  <div className='bg-gray-100 dark:bg-[#2a2a2a] h-52 md:h-64 flex items-center justify-center overflow-hidden'>
                     <img
                       src={product.image}
                       alt={product.name}
+                      width={300}
+                      height={300}
+                      loading='lazy'
+                      decoding='async'
                       className='h-full w-full object-contain p-4 group-hover:scale-110 transition-transform duration-500'
                     />
                   </div>
@@ -97,7 +102,7 @@ const NewArrivals = () => {
               </div>
 
               {/* Info */}
-              <div className='p-4'>
+              <div className='p-4 bg-gray-50 dark:bg-[#1e1e1e]'>
                 <Link to={`/products/${product.id}`}>
                   <h3 className='text-sm font-semibold text-gray-800 dark:text-gray-100 line-clamp-1 hover:text-[#138695] transition-colors'>
                     {product.name}

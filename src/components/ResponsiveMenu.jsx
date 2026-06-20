@@ -1,5 +1,4 @@
 import { motion, AnimatePresence } from 'framer-motion'
-import { FaUserCircle } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 import { NavbarMenu } from './Navbar'
 import { X } from 'lucide-react'
@@ -40,12 +39,14 @@ const ResponsiveMenu = ({ showMenu, setShowMenu }) => {
             </button>
 
             <div>
-              {/* User info */}
+              {/* FEAT-08: Replace fake user info with brand message */}
               <div className='flex items-center justify-start gap-3 mb-10'>
-                <FaUserCircle size={46} className='text-[#138695]' />
+                <div className='w-12 h-12 bg-[#138695]/10 rounded-full flex items-center justify-center flex-shrink-0' aria-hidden='true'>
+                  <span className='text-2xl'>👟</span>
+                </div>
                 <div>
-                  <h1 className='font-semibold'>Hello User</h1>
-                  <h2 className='text-sm text-gray-400'>Premium Member</h2>
+                  <p className='font-bold text-lg text-gray-900 dark:text-white'>Step Into Style</p>
+                  <p className='text-xs text-gray-400'>Nike Exclusive Collection</p>
                 </div>
               </div>
 

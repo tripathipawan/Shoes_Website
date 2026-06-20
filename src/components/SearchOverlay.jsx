@@ -120,7 +120,7 @@ const SearchOverlay = ({ isOpen, onClose }) => {
                             onClick={onClose}
                             className='flex items-center gap-4 flex-1 min-w-0'
                           >
-                            <div className='w-16 h-16 bg-gray-100 dark:bg-[#222] rounded-xl flex-shrink-0 overflow-hidden'>
+                            <div className='w-16 h-16 bg-gray-100 dark:bg-[#2a2a2a] rounded-xl flex-shrink-0 overflow-hidden'>
                               <img
                                 src={product.image}
                                 alt={product.name}
@@ -160,7 +160,7 @@ const SearchOverlay = ({ isOpen, onClose }) => {
                         onClick={onClose}
                         className='flex items-center gap-4 p-3 rounded-xl hover:bg-gray-50 dark:hover:bg-[#1a1a1a] group transition-colors duration-150'
                       >
-                        <div className='w-14 h-14 bg-gray-100 dark:bg-[#222] rounded-xl flex-shrink-0 overflow-hidden'>
+                        <div className='w-14 h-14 bg-gray-100 dark:bg-[#2a2a2a] rounded-xl flex-shrink-0 overflow-hidden'>
                           <img
                             src={product.image}
                             alt={product.name}

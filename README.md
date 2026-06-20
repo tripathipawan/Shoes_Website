@@ -2,8 +2,6 @@
 
 A fully functional Nike shoes e-commerce storefront built with React 18, Tailwind CSS 3, and Framer Motion. The app delivers a multi-page shopping experience with a real cart system, product browsing by category, a dedicated product detail page with image switcher, a contact form, dark mode, and a custom animated mouse cursor — all without any backend, running entirely on the client.
 
-**Live Demo → [nike-eta-beryl.vercel.app](https://nike-eta-beryl.vercel.app)**
-
 ---
 
 ## What This Project Does
@@ -46,7 +44,6 @@ The app is a fully navigable storefront powered by React Router DOM with 7 defin
 | Lucide React | 0.468.0 | Cart icon (`ShoppingCart`), remove icon (`X`), product rating (`Star`) |
 | react-mouse-follower | 2.0.3 | Custom animated cursor wrapping the entire app via `UpdateFollower` |
 | Vite | 6.0.1 | Build tool and dev server |
-| ESLint | 9.15.0 | Linting with `eslint-plugin-react-hooks` and `eslint-plugin-react-refresh` |
 
 ---
 

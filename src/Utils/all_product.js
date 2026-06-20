@@ -603,6 +603,27 @@ let all_product = [
     image3: 'https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/i1-a05c2959-8fdc-4906-b454-7aae3d94c5db/NIKE+AIR+MAX+270+%28PS%29.png',
     new_price: 92.0,
     old_price: 110.5,
+  }, {
+    id: 56,
+    name: "Nike Air Zex Xulse",
+    category: "women",
+    image: 'https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/671fc01d-5205-4a54-8349-0b9eae869dac/NIKE+AIR+MAX+PULSE.png',
+    image1: 'https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/d30159c2-ba5c-4959-985b-80d614ff83db/NIKE+AIR+MAX+PULSE.png',
+    image2: 'https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/44f91a11-ca43-4c16-8d81-3acd659e1737/NIKE+AIR+MAX+PULSE.png',
+    image3: 'https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/b662ee3f-c9c1-48e1-bd2f-5823457c94bc/NIKE+AIR+MAX+PULSE.png',
+    new_price: 30.0,
+    old_price: 130.5,
+  },
+  {
+    id: 57,
+    name: "Nike Air Max 2",
+    category: "men",
+    image: 'https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/24d390b5-d2d2-443f-b545-59535c5b0cd6/W+NIKE+AIR+MAX+1.png',
+    image1: 'https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/4125359b-f2ff-456e-b5a7-eec4f171ac4e/W+NIKE+AIR+MAX+1.png',
+    image2: 'https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/71d2bce3-a3c7-4b23-a8e4-8f29bd164219/W+NIKE+AIR+MAX+1.png',
+    image3: 'https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/74aaf1b0-5fda-4848-a8cb-713948926f91/W+NIKE+AIR+MAX+1.png',
+    new_price: 140.0,
+    old_price: 158.0,
   },
 ];
 
